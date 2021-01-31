@@ -15,22 +15,27 @@ use pocketmine\Player;
 
 abstract class CustomForm implements Form{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
-	/** @var Icon|null */
-	private $icon;
+	private ?Icon $icon;
 
-	/** @var CustomFormEntry[] */
-	private $entries = [];
+	private array $entries = [];
 
 	/** @var Closure[] */
 	private $entry_listeners = [];
 
+    /**
+     * CustomForm constructor.
+     * @param string $title
+     */
 	public function __construct(string $title){
 		$this->title = $title;
 	}
 
+    /**
+     * @param Icon|null $icon
+     * @return void
+     */
 	final public function setIcon(?Icon $icon) : void{
 		$this->icon = $icon;
 	}
@@ -38,6 +43,7 @@ abstract class CustomForm implements Form{
 	/**
 	 * @param CustomFormEntry $entry
 	 * @param Closure|null $listener
+     * @return void
 	 *
 	 * Listener parameters:
 	 *  * Player $player
@@ -51,6 +57,11 @@ abstract class CustomForm implements Form{
 		}
 	}
 
+    /**
+     * @param Player $player
+     * @param mixed $data
+     * @return void
+     */
 	public function handleResponse(Player $player, $data) : void{
 		if($data === null){
 			$this->onClose($player);
@@ -71,9 +82,16 @@ abstract class CustomForm implements Form{
 		}
 	}
 
+    /**
+     * @param Player $player
+     * @return void
+     */
 	public function onClose(Player $player) : void{
 	}
 
+    /**
+     * @return array
+     */
 	final public function jsonSerialize() : array{
 		return [
 			"type" => "custom_form",

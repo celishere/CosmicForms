@@ -11,11 +11,9 @@ final class Icon implements JsonSerializable{
 	public const URL = "url";
 	public const PATH = "path";
 
-	/** @var string */
-	private $type;
+	private string $type;
 
-	/** @var string */
-	private $data;
+	private string $data;
 
 	public function __construct(string $type, string $data){
 		$this->type = $type;

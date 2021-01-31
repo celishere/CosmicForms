@@ -9,43 +9,64 @@ use InvalidArgumentException;
 
 final class InputEntry implements CustomFormEntry, ModifyableEntry{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
-	/** @var string|null */
-	private $placeholder;
+	private ?string $placeholder;
 
-	/** @var string|null */
-	private $default;
+	private ?string $default;
 
+    /**
+     * InputEntry constructor.
+     * @param string $title
+     * @param string|null $placeholder
+     * @param string|null $default
+     */
 	public function __construct(string $title, ?string $placeholder = null, ?string $default = null){
 		$this->title = $title;
 		$this->placeholder = $placeholder;
 		$this->default = $default;
 	}
 
+    /**
+     * @return string|null
+     */
 	public function getPlaceholder() : ?string{
 		return $this->placeholder;
 	}
 
+    /**
+     * @return string|null
+     */
 	public function getDefault() : ?string{
 		return $this->default;
 	}
 
+    /**
+     * @return string
+     */
 	public function getValue() : string{
 		return $this->default;
 	}
 
+    /**
+     * @param $value
+     */
 	public function setValue($value) : void{
 		$this->default = $value;
 	}
 
+    /**
+     * @param mixed $input
+     */
 	public function validateUserInput($input) : void{
 		if(!is_string($input)){
 			throw new InvalidArgumentException("Failed to process invalid user input: " . $input);
 		}
 	}
 
+    /**
+     * @return array
+     */
 	public function jsonSerialize() : array{
 		return [
 			"type" => "input",

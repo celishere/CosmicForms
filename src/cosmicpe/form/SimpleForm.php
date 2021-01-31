@@ -10,22 +10,26 @@ use Exception;
 use cosmicpe\form\entries\simple\Button;
 
 use pocketmine\form\FormValidationException;
+
 use pocketmine\Player;
 
 abstract class SimpleForm implements Form{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
-	/** @var string|null */
-	private $content;
+	private ?string $content;
 
 	/** @var Button[] */
-	private $buttons = [];
+	private array $buttons = [];
 
 	/** @var Closure[] */
 	private $button_listeners = [];
 
+    /**
+     * SimpleForm constructor.
+     * @param string $title
+     * @param string|null $content
+     */
 	public function __construct(string $title, ?string $content = null){
 		$this->title = $title;
 		$this->content = $content;
@@ -46,6 +50,10 @@ abstract class SimpleForm implements Form{
 		}
 	}
 
+    /**
+     * @param Player $player
+     * @param mixed $data
+     */
 	final public function handleResponse(Player $player, $data) : void{
 		if($data === null){
 			$this->onClose($player);
@@ -64,12 +72,23 @@ abstract class SimpleForm implements Form{
 		}
 	}
 
+    /**
+     * @param Player $player
+     * @param Button $button
+     * @param int $index
+     */
 	public function onClickButton(Player $player, Button $button, int $index) : void{
 	}
 
+    /**
+     * @param Player $player
+     */
 	public function onClose(Player $player) : void{
 	}
 
+    /**
+     * @return array
+     */
 	final public function jsonSerialize() : array{
 		return [
 			"type" => "form",

@@ -9,21 +9,24 @@ use InvalidArgumentException;
 
 final class SliderEntry implements CustomFormEntry, ModifyableEntry{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
-	/** @var float */
-	private $minimum;
+	private float $minimum;
 
-	/** @var float */
-	private $maximum;
+	private float $maximum;
 
-	/** @var float */
-	private $step;
+	private float $step;
 
-	/** @var float */
-	private $default;
+	private float $default;
 
+    /**
+     * SliderEntry constructor.
+     * @param string $title
+     * @param float $minimum
+     * @param float $maximum
+     * @param float $step
+     * @param float $default
+     */
 	public function __construct(string $title, float $minimum, float $maximum, float $step = 0.0, float $default = 0.0){
 		$this->title = $title;
 		$this->minimum = $minimum;
@@ -32,20 +35,32 @@ final class SliderEntry implements CustomFormEntry, ModifyableEntry{
 		$this->default = $default;
 	}
 
+    /**
+     * @return float
+     */
 	public function getValue() : float{
 		return $this->default;
 	}
 
+    /**
+     * @param $value
+     */
 	public function setValue($value) : void{
 		$this->default = $value;
 	}
 
+    /**
+     * @param mixed $input
+     */
 	public function validateUserInput($input) : void{
 		if(!is_float($input) || $input > $this->maximum || $input < $this->minimum){
 			throw new InvalidArgumentException("Failed to process invalid user input: " . $input);
 		}
 	}
 
+    /**
+     * @return array
+     */
 	public function jsonSerialize() : array{
 		return [
 			"type" => "slider",

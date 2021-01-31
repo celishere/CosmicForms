@@ -6,13 +6,19 @@ namespace cosmicpe\form\entries\custom;
 
 final class LabelEntry implements CustomFormEntry{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
+    /**
+     * LabelEntry constructor.
+     * @param string $title
+     */
 	public function __construct(string $title){
 		$this->title = $title;
 	}
 
+    /**
+     * @return array
+     */
 	public function jsonSerialize() : array{
 		return [
 			"type" => "label",

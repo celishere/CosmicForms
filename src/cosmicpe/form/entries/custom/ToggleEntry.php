@@ -9,11 +9,9 @@ use InvalidArgumentException;
 
 final class ToggleEntry implements CustomFormEntry, ModifyableEntry{
 
-	/** @var string */
-	private $title;
+	private string $title;
 
-	/** @var bool */
-	private $default;
+	private bool $default;
 
 	public function __construct(string $title, bool $default = false){
 		$this->title = $title;
