@@ -15,7 +15,8 @@ final class Button implements FormEntry{
 	/** @var Icon|null */
 	private $icon;
 
-	private array $data;
+	/** @var array */
+	private $data;
 
     /**
      * Button constructor.
