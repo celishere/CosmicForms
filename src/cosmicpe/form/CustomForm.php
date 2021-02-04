@@ -6,8 +6,10 @@ namespace cosmicpe\form;
 
 use Closure;
 use Exception;
+
 use cosmicpe\form\entries\custom\CustomFormEntry;
 use cosmicpe\form\entries\ModifyableEntry;
+
 use cosmicpe\form\types\Icon;
 
 use pocketmine\form\FormValidationException;
